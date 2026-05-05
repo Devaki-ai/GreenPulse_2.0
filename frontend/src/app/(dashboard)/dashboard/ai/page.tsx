@@ -7,7 +7,7 @@ import type { DiseaseDetection } from '@/types';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
-import { PageLoader } from '@/components/ui/LoadingSpinner';
+import LoadingSpinner, { PageLoader } from '@/components/ui/LoadingSpinner';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import {
@@ -384,7 +384,7 @@ export default function AIPage() {
           {/* Recommendations output */}
           {recLoading ? (
             <Card className="flex items-center justify-center min-h-[300px]">
-              <PageLoader text="AI is analyzing your soil..." />
+              <LoadingSpinner size="xl" text="AI is analyzing your soil..." />
             </Card>
           ) : recommendations ? (
             <div className="space-y-4">
