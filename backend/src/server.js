@@ -32,11 +32,11 @@ const app = express();
 // ─── Security Middleware ───────────────────────────────────────────────────────
 app.use(helmet());
 app.use(cors({
-  origin: [
-    process.env.FRONTEND_URL || 'http://localhost:3000',
-    'http://localhost:3001',
-    'http://localhost:3002',
-  ],
+  origin: function(origin, callback) {
+    // Allow all origins in production (Vercel URLs change with each deployment)
+    // Security is handled by JWT authentication
+    return callback(null, true);
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
