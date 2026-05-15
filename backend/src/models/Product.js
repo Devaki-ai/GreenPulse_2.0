@@ -102,13 +102,12 @@ productSchema.virtual('isExpired').get(function () {
 });
 
 // ─── Pre-save: Calculate average rating ───────────────────────────────────────
-productSchema.pre('save', function (next) {
+productSchema.pre('save', function () {
   if (this.reviews && this.reviews.length > 0) {
     const total = this.reviews.reduce((sum, r) => sum + r.rating, 0);
     this.ratings.average = parseFloat((total / this.reviews.length).toFixed(1));
     this.ratings.count = this.reviews.length;
   }
-  next();
 });
 
 // ─── Indexes ───────────────────────────────────────────────────────────────────
